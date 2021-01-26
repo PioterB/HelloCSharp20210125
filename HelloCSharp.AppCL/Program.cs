@@ -38,5 +38,14 @@ namespace HelloCSharp.AppCL
             var g100 = Weight.FromGrams(100);
             var oneKg = Weight.FromKilograms(1);
         }
+
+        private void EnumerationSamples()
+        {
+            var box = new Jar();
+            var food = new Sandwich(300);
+            var label = new SandwichLabel("double burger", SandwichSize.Small, 
+                Allergens.Milk | Allergens.Sesame);
+            box.Put(food, label);
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace HelloCSharp.Domain
     public class Wrapping : IItem
     {
         private object _something;
+        private SandwichLabel _label;
 
         public Wrapping(bool hermetic, bool multiuse)
         {
@@ -20,7 +21,7 @@ namespace HelloCSharp.Domain
 
         public DateTime ExpDate { get; }
 
-        public void Put(object item)
+        public void Put(object item, SandwichLabel label = null)
         {
             if (Multiuse == false)
             {
@@ -33,12 +34,14 @@ namespace HelloCSharp.Domain
             }
 
             _something = item;
+            _label = label;
         }
 
         public object Takeout()
         {
             object something = _something;
             _something = default;
+            _label = default;
             return something;
         }
     }

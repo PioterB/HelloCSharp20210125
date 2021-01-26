@@ -13,11 +13,11 @@ namespace HelloCSharp.Domain
             ExpDate = DateTime.Now.AddDays(10); 
         }
 
-        public string Size { get; }
+        public SandwichSize Size { get; }
 
         public DateTime ExpDate { get; private set; }
 
-        private string ComputeSize(in int grams)
+        private SandwichSize ComputeSize(in int grams)
         {
             throw new System.NotImplementedException();
         }
