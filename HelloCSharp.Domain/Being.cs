@@ -2,7 +2,6 @@
 {
     public class Being : ISomething
     {
-        public int HeartRate { get; }
 
         public void Eat(Sandwich sandwich)
         {
@@ -10,6 +9,7 @@
              * logic for eating
              */
         }
+        public int HeartRate { get; }
 
         public float Weight { get; }
 

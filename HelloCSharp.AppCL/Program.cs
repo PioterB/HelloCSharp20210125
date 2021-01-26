@@ -5,9 +5,6 @@ namespace HelloCSharp.AppCL
 {
     class Program
     {
-        protected static int _fieldInClass;
-        private int _myValue;
-
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -20,9 +17,6 @@ namespace HelloCSharp.AppCL
             var jar = new Jar();
 
             var man = new Man();
-            man.Gender;
-
-            Man.MinManAge;
         }
 
         private void BuildInTypes()

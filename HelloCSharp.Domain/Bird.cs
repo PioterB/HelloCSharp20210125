@@ -7,11 +7,11 @@
             Domestic = false;
         }
 
+        public bool Domestic { get; private set; }
+
         public void Domesticate()
         {
             Domestic = true;
         }
-
-        public bool Domestic { get; private set; }
     }
 }

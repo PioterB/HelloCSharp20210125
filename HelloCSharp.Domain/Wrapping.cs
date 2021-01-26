@@ -18,6 +18,8 @@ namespace HelloCSharp.Domain
 
         public bool Hermetic { get; private set; }
 
+        public DateTime ExpDate { get; }
+
         public void Put(object item)
         {
             if (Multiuse == false)
@@ -39,8 +41,6 @@ namespace HelloCSharp.Domain
             _something = default;
             return something;
         }
-
-        public DateTime ExpDate { get; }
     }
 
     public class Jar : Wrapping

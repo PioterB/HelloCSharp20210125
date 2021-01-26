@@ -15,11 +15,11 @@ namespace HelloCSharp.Domain
 
         public string Size { get; }
 
+        public DateTime ExpDate { get; private set; }
+
         private string ComputeSize(in int grams)
         {
             throw new System.NotImplementedException();
         }
-
-        public DateTime ExpDate { get; private set; }
     }
 }
