@@ -1,5 +1,6 @@
 ﻿using System;
 using HelloCSharp.Domain;
+using HelloCSharp.Tools.Physics;
 
 namespace HelloCSharp.AppCL
 {
@@ -30,6 +31,12 @@ namespace HelloCSharp.AppCL
             Int64 bigNumer;
             uint noNegative = 1;
             short bits16 = 128;
+        }
+
+        private void NamedConstructors()
+        {
+            var g100 = Weight.FromGrams(100);
+            var oneKg = Weight.FromKilograms(1);
         }
     }
 }

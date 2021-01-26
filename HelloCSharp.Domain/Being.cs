@@ -1,4 +1,6 @@
-﻿namespace HelloCSharp.Domain
+﻿using HelloCSharp.Tools.Physics;
+
+namespace HelloCSharp.Domain
 {
     public class Being : ISomething
     {
@@ -11,7 +13,7 @@
         }
         public int HeartRate { get; }
 
-        public float Weight { get; }
+        public Weight Weight { get; }
 
         public int Age { get; }
     }

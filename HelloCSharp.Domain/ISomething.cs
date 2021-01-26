@@ -1,10 +1,11 @@
 ﻿using System;
+using HelloCSharp.Tools.Physics;
 
 namespace HelloCSharp.Domain
 {
     public interface ISomething
     {
-        float Weight { get; }
+        Weight Weight { get; }
 
         int Age { get; }
     }
