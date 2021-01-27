@@ -14,9 +14,11 @@ namespace HelloCSharp.AppCL
             var sandwich = new Sandwich(50);
 
             var paper = new Wrapping<object>(false, false); 
-            var plasticBag = new Wrapping<ISomething>(false, true); 
+            var plasticBag = new Wrapping<ISomething>(false, true);
 
-            Polymorphism();
+            object obj = sandwich;
+
+            Console.WriteLine("tell me about yourself: " + obj.ToString());
         }
 
         private void BuildInTypes()

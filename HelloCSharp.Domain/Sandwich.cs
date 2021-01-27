@@ -17,6 +17,11 @@ namespace HelloCSharp.Domain
 
         public DateTime ExpDate { get; private set; }
 
+        public override string ToString()
+        {
+            return base.ToString() + " " + Size + " size";
+        }
+
         private SandwichSize ComputeSize(in int grams)
         {
             return SandwichSize.Small;
