@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace HelloCSharp.Domain
 {
-    public class Sandwich : IItem
+    public class Sandwich : Object, IItem
     {
         private DateTime _expDate = DateTime.Now.AddDays(10);
         

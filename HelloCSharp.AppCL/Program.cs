@@ -47,5 +47,100 @@ namespace HelloCSharp.AppCL
                 Allergens.Milk | Allergens.Sesame);
             box.Put(food, label);
         }
+
+
+        private void ConsumeLogicUnsafeCasting()
+        {
+            var box = new Jar();
+            var food = new Sandwich(300);
+            var label = new SandwichLabel("double burger", SandwichSize.Small,
+                Allergens.Milk | Allergens.Sesame);
+            box.Put(food, label);
+
+            Human human = new Woman();
+
+            var boxContent = (Sandwich)box.Takeout();
+
+            human.Eat(boxContent);
+        }
+
+        private void ConsumeLogicSafeCasting()
+        {
+            var box = new Jar();
+            var food = new Sandwich(300);
+            var label = new SandwichLabel("double burger", SandwichSize.Small,
+                Allergens.Milk | Allergens.Sesame);
+            box.Put(label, label);
+
+            Human human = new Woman();
+
+            var boxContent = box.Takeout();
+
+            if (boxContent is Sandwich)
+            {
+                var castedBack = (Sandwich)boxContent;
+                human.Eat(castedBack);
+            }
+            else
+            {
+                /* do sth when box does not have sandwich - cry? ;)*/
+            }
+        }
+
+        private void ConsumeLogicSafeCastingButExpensive()
+        {
+            var box = new Jar();
+            var food = new Sandwich(300);
+            var label = new SandwichLabel("double burger", SandwichSize.Small,
+                Allergens.Milk | Allergens.Sesame);
+            box.Put(label, label);
+
+            Human human = new Woman();
+
+            Sandwich boxContent;
+
+            try
+            {
+                boxContent = (Sandwich) box.Takeout();
+            }
+            catch (InvalidCastException e)
+            {
+                /* do sth when box does not have sandwich - cry? ;)*/
+                Console.WriteLine("crying, no food inside because " + e.Message);
+                return;
+            }
+            catch (Exception e)
+            {
+                /* do sth when box does not have sandwich - cry? ;)*/
+                Console.WriteLine("crying, no food inside");
+                return;
+            }
+
+            human.Eat(boxContent);
+        }
+
+        private void ConsumeLogicSafeCastingLessConservative()
+        {
+            var box = new Jar();
+            var food = new Sandwich(300);
+            var label = new SandwichLabel("double burger", SandwichSize.Small,
+                Allergens.Milk | Allergens.Sesame);
+            box.Put(label, label);
+
+            Human human = new Woman();
+
+            var boxContent = box.Takeout();
+
+            Sandwich unboxedSandwich = boxContent as Sandwich;
+
+            if (unboxedSandwich != null)
+            {
+                human.Eat(unboxedSandwich);
+            }
+            else
+            {
+                /* do sth when box does not have sandwich - cry? ;)*/
+            }
+        }
     }
 }

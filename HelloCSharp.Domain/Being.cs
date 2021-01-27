@@ -11,6 +11,7 @@ namespace HelloCSharp.Domain
              * logic for eating
              */
         }
+
         public int HeartRate { get; }
 
         public Weight Weight { get; }
