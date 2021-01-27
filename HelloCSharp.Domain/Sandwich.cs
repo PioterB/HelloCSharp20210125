@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Runtime.Remoting;
 using System.Threading;
 
 namespace HelloCSharp.Domain
 {
-    public class Sandwich : Object, IItem
+    public class Sandwich : Object, IItem, IEquatable<Sandwich>, IEquatable<Wrapping<Sandwich>>
     {
         private DateTime _expDate = DateTime.Now.AddDays(10);
         
@@ -20,6 +21,27 @@ namespace HelloCSharp.Domain
         public override string ToString()
         {
             return base.ToString() + " " + Size + " size";
+        }
+
+        public bool Equals(Sandwich other)
+        {
+            return Size == other.Size;
+        }
+
+        public bool Equals(Wrapping<Sandwich> other)
+        {
+            return Size == other.Label.Size;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            var other = obj as Sandwich;
+            if (other == null)
+            {
+                return false;
+            }
+
+            return Equals(other);
         }
 
         private SandwichSize ComputeSize(in int grams)

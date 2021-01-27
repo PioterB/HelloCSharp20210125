@@ -21,6 +21,8 @@ namespace HelloCSharp.Domain
 
         public DateTime ExpDate { get; }
 
+        public SandwichLabel Label => _label;
+
         public void Put(TContent item, SandwichLabel label = null)
         {
             if (Multiuse == false)
