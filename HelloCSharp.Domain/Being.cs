@@ -17,5 +17,10 @@ namespace HelloCSharp.Domain
         public Weight Weight { get; }
 
         public int Age { get; }
+
+        public virtual string GiveVoice()
+        {
+            return "aaaaaaa";
+        }
     }
 }

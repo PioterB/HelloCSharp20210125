@@ -16,7 +16,7 @@ namespace HelloCSharp.AppCL
             var paper = new Wrapping<object>(false, false); 
             var plasticBag = new Wrapping<ISomething>(false, true); 
 
-            Generics();
+            Polymorphism();
         }
 
         private void BuildInTypes()
@@ -181,6 +181,20 @@ namespace HelloCSharp.AppCL
 
             matrioszka.Put(new Wrapping<Wrapping<Sandwich>>(true, true));
             var xxx = matrioszka.Takeout();
+        }
+
+        private static void Polymorphism()
+        {
+            var lifesInMyRoom = new List<Being>();
+            lifesInMyRoom.Add(new Dog());
+            lifesInMyRoom.Add(new Bird());
+            lifesInMyRoom.Add(new Woman());
+            lifesInMyRoom.Add(new Man("Piotr"));
+
+            foreach (Being being in lifesInMyRoom)
+            {
+                Console.WriteLine("{0} sounds: {1}", being.GetType().Name, being.GiveVoice());
+            }
         }
     }
 }

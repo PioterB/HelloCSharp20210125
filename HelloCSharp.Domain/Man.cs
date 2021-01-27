@@ -12,5 +12,10 @@
         public string Name { get; }
 
         public override string Gender => "man";
+
+        public override string GiveVoice()
+        {
+            return "I'm The Man";
+        }
     }
 }
