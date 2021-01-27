@@ -4,9 +4,9 @@ using System.Text;
 
 namespace HelloCSharp.Domain
 {
-    public class Wrapping : IItem
+    public class Wrapping<TContent> : IItem 
     {
-        private object _something;
+        private TContent _something;
         private SandwichLabel _label;
 
         public Wrapping(bool hermetic, bool multiuse)
@@ -21,7 +21,7 @@ namespace HelloCSharp.Domain
 
         public DateTime ExpDate { get; }
 
-        public void Put(object item, SandwichLabel label = null)
+        public void Put(TContent item, SandwichLabel label = null)
         {
             if (Multiuse == false)
             {
@@ -37,19 +37,27 @@ namespace HelloCSharp.Domain
             _label = label;
         }
 
-        public object Takeout()
+        public TContent Takeout()
         {
-            object something = _something;
+            TContent something = _something;
             _something = default;
             _label = default;
             return something;
         }
     }
 
-    public class Jar : Wrapping
+    public class Jar<TContent> : Wrapping<TContent> where TContent : IPowder, ISpice
     {
         public Jar() : base(false, true)
         {
         }
+    }
+
+    public interface ISpice
+    {
+    }
+
+    public interface IPowder
+    {
     }
 }

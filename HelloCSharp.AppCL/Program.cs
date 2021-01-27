@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HelloCSharp.Domain;
 using HelloCSharp.Tools.Physics;
 
@@ -12,12 +13,10 @@ namespace HelloCSharp.AppCL
 
             var sandwich = new Sandwich(50);
 
-            var paper = new Wrapping(false, false); 
-            var plasticBag = new Wrapping(false, true); 
+            var paper = new Wrapping<object>(false, false); 
+            var plasticBag = new Wrapping<ISomething>(false, true); 
 
-            var jar = new Jar();
-
-            var man = new Man();
+            Generics();
         }
 
         private void BuildInTypes()
@@ -41,7 +40,7 @@ namespace HelloCSharp.AppCL
 
         private void EnumerationSamples()
         {
-            var box = new Jar();
+            var box = new Wrapping<Sandwich>(false, false);
             var food = new Sandwich(300);
             var label = new SandwichLabel("double burger", SandwichSize.Small, 
                 Allergens.Milk | Allergens.Sesame);
@@ -51,7 +50,7 @@ namespace HelloCSharp.AppCL
 
         private void ConsumeLogicUnsafeCasting()
         {
-            var box = new Jar();
+            var box = new Wrapping<Sandwich>(false, false);
             var food = new Sandwich(300);
             var label = new SandwichLabel("double burger", SandwichSize.Small,
                 Allergens.Milk | Allergens.Sesame);
@@ -59,18 +58,19 @@ namespace HelloCSharp.AppCL
 
             Human human = new Woman();
 
-            var boxContent = (Sandwich)box.Takeout();
+            var boxContent = box.Takeout();
 
             human.Eat(boxContent);
         }
 
+        /*
         private void ConsumeLogicSafeCasting()
         {
             var box = new Jar();
             var food = new Sandwich(300);
             var label = new SandwichLabel("double burger", SandwichSize.Small,
                 Allergens.Milk | Allergens.Sesame);
-            box.Put(label, label);
+            box.Put(food, label);
 
             Human human = new Woman();
 
@@ -83,10 +83,11 @@ namespace HelloCSharp.AppCL
             }
             else
             {
-                /* do sth when box does not have sandwich - cry? ;)*/
+                // do sth when box does not have sandwich - cry? ;)
             }
         }
-
+        */
+        /*
         private void ConsumeLogicSafeCastingButExpensive()
         {
             var box = new Jar();
@@ -105,20 +106,22 @@ namespace HelloCSharp.AppCL
             }
             catch (InvalidCastException e)
             {
-                /* do sth when box does not have sandwich - cry? ;)*/
+                // do sth when box does not have sandwich - cry? ;)
                 Console.WriteLine("crying, no food inside because " + e.Message);
                 return;
             }
             catch (Exception e)
             {
-                /* do sth when box does not have sandwich - cry? ;)*/
+                // do sth when box does not have sandwich - cry? ;)
                 Console.WriteLine("crying, no food inside");
                 return;
             }
 
             human.Eat(boxContent);
         }
+        */
 
+        /*
         private void ConsumeLogicSafeCastingLessConservative()
         {
             var box = new Jar();
@@ -139,8 +142,45 @@ namespace HelloCSharp.AppCL
             }
             else
             {
-                /* do sth when box does not have sandwich - cry? ;)*/
+                // do sth when box does not have sandwich - cry? ;)
             }
+        }
+        */
+
+        private static void Generics()
+        {
+            var list = new List<Man>();
+            list.Add(new Man("Piotr"));
+            list.Add(new Man("Ania"));
+            list.Add(new Man("Jon"));
+
+            Man secondElement = list[1];
+            secondElement = new Man("Marta");
+
+            list[1] = new Man("Wojtek");
+
+            var any = new List<object>();
+            any.Add(new Dog());
+            any.Add(new Sandwich(500));
+
+            var firstFormAny = any[1];
+
+            var items = new List<IItem>();
+            items.Add(new Sandwich(500));
+            items.Add(new Wrapping<IItem>(false, false));
+
+            List<SandwichSize> choosedSizes = new List<SandwichSize>();
+            choosedSizes.Add(SandwichSize.Small);
+            choosedSizes.Add(SandwichSize.Small);
+            choosedSizes.Add(SandwichSize.Small);
+            choosedSizes.Add(SandwichSize.Big);
+
+            choosedSizes = new List<SandwichSize>();
+
+            var matrioszka = new Wrapping<Wrapping<Wrapping<Sandwich>>>(false, false);
+
+            matrioszka.Put(new Wrapping<Wrapping<Sandwich>>(true, true));
+            var xxx = matrioszka.Takeout();
         }
     }
 }

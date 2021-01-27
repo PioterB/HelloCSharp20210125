@@ -19,7 +19,7 @@ namespace HelloCSharp.Domain
 
         private SandwichSize ComputeSize(in int grams)
         {
-            throw new System.NotImplementedException();
+            return SandwichSize.Small;
         }
     }
 }
