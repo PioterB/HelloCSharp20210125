@@ -2,23 +2,74 @@
 using System.Collections.Generic;
 using HelloCSharp.Domain;
 using HelloCSharp.Tools.Physics;
+using HelloCSharp.Tools.Time;
 
 namespace HelloCSharp.AppCL
 {
     class Program
     {
+        private static readonly List<Human> _humans = new List<Human>();
+        private static Random _radom = new Random((int)DateTime.Now.Ticks); 
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Clock.Start();
+            Clock.NewDay += Clock_NewDay;
 
-            var sandwich = new Sandwich(50);
+            bool end = false;
+            do
+            {
+                var key = Console.ReadKey(true);
+                switch (key.KeyChar)
+                {
+                    case 'Z': end = true; break;
+                    case 'M': NewMan(); break;
+                }
+            } while (!end);
 
-            var paper = new Wrapping<object>(false, false); 
-            var plasticBag = new Wrapping<ISomething>(false, true);
+            foreach (var human in _humans)
+            {
+                human.Dispose();
+            }
 
-            object obj = sandwich;
+            Clock.NewDay -= Clock_NewDay;
 
-            Console.WriteLine("tell me about yourself: " + obj.ToString());
+            Clock.Stop();
+        }
+
+        private static void Clock_NewDay(Time time)
+        {
+            DisplayNewDate(time);
+            DrawHumans(_humans);
+        }
+
+        private static void NewMan()
+        {
+            var human = new Man(((char)_radom.Next('A', 'Z')).ToString());
+            // human.Birthday += OnHumanAging;
+            _humans.Add(human);
+
+            DrawHumans(_humans);
+        }
+
+        private static void DrawHumans(List<Human> humans)
+        {
+            Console.CursorLeft = 0;
+            Console.CursorTop = 10;
+            Console.Write("Humans");
+            Console.CursorLeft = 0;
+            Console.CursorTop = 12;
+            foreach (var human in humans)
+            {
+                Console.WriteLine("{0} [{1}]", human.Gender, human.Age);
+            }
+        }
+
+        private static void DisplayNewDate(Time time)
+        {
+            Console.CursorLeft = 0;
+            Console.CursorTop = 0;
+            Console.Write("[Date] {0,3}.{1}", time.Day, time.Year);
         }
 
         private void BuildInTypes()

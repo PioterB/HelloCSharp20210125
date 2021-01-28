@@ -55,7 +55,7 @@ namespace HelloCSharp.Tools.Time
 
                 ReportDayChange(_day, _year);
 
-                Thread.Sleep(240); // 240 msec, 10msec simulates 1h
+                Thread.Sleep(240); // 240 msec, 1d elapsed
 
                 lock (Locker)
                 {

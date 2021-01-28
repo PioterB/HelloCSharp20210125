@@ -16,11 +16,16 @@ namespace HelloCSharp.Domain
 
         public Weight Weight { get; }
 
-        public int Age { get; }
+        public int Age { get; private set; }
 
         public virtual string GiveVoice()
         {
             return "aaaaaaa";
+        }
+
+        protected void IncrementAge()
+        {
+            Age++;
         }
     }
 }

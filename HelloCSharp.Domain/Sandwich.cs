@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace HelloCSharp.Domain
 {
-    public class Sandwich : Object, IItem, IEquatable<Sandwich>, IEquatable<Wrapping<Sandwich>>
+    public class Sandwich : Object, IItem, IEquatable<Sandwich>, IEquatable<Wrapping<Sandwich>>, IComparable<Sandwich>, IComparable<Wrapping<Sandwich>>
     {
         private DateTime _expDate = DateTime.Now.AddDays(10);
         
@@ -31,6 +31,16 @@ namespace HelloCSharp.Domain
         public bool Equals(Wrapping<Sandwich> other)
         {
             return Size == other.Label.Size;
+        }
+
+        public int CompareTo(Sandwich other)
+        {
+            return (int)Size.CompareTo((int)(other.Size));
+        }
+
+        public int CompareTo(Wrapping<Sandwich> other)
+        {
+            return Size.CompareTo(other.Label.Size);
         }
 
         public override bool Equals(object? obj)

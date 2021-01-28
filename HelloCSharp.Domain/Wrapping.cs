@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelloCSharp.Domain
 {
-    public class Wrapping<TContent> : IItem 
+    public class Wrapping<TContent> : IItem, IEquatable<Wrapping<TContent>>, IEquatable<TContent>
     {
         private TContent _something;
         private SandwichLabel _label;
@@ -20,6 +20,8 @@ namespace HelloCSharp.Domain
         public bool Hermetic { get; private set; }
 
         public DateTime ExpDate { get; }
+
+        public bool HasContent => _something != null;
 
         public SandwichLabel Label => _label;
 
@@ -45,6 +47,26 @@ namespace HelloCSharp.Domain
             _something = default;
             _label = default;
             return something;
+        }
+
+        public bool Equals(Wrapping<object> other)
+        {
+            return Hermetic == other.Hermetic && Multiuse == other.Multiuse;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Wrapping<TContent> other && Equals(other);
+        }
+
+        public bool Equals(Wrapping<TContent> other)
+        {
+            return Label.Equals(other.Label);
+        }
+
+        public bool Equals(TContent other)
+        {
+            throw new NotImplementedException();
         }
     }
 
