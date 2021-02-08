@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Sockets;
 using System.Reflection.Metadata.Ecma335;
 using HelloCSharp.Domain;
 using HelloCSharp.Tools.Physics;
@@ -261,6 +263,37 @@ namespace HelloCSharp.AppCL
             foreach (Being being in lifesInMyRoom)
             {
                 Console.WriteLine("{0} sounds: {1}", being.GetType().Name, being.GiveVoice());
+            }
+        }
+
+
+        private void Streams()
+        {
+            var fileStream = File.Open("c:\\myFile.txt", FileMode.OpenOrCreate);
+            var writer = new StreamWriter(fileStream);
+            writer.Write("write this for me");
+
+            var reader = new StreamReader(fileStream);
+            fileStream.Dispose();
+
+            using (var stream = File.Open("c:\\xxx.txt", FileMode.Open))
+            {
+                var xxxReader = new StreamReader(stream);
+                var wholeContent = xxxReader.ReadToEnd();
+            }
+
+
+            /* code below is using transformed by compiler, Dispose is called */
+            FileStream stream1 = null;
+            try
+            {
+                stream1 = File.Open("c:\\xxx.txt", FileMode.Open);
+                var xxxReader = new StreamReader(stream1);
+                var wholeContent = xxxReader.ReadToEnd();
+            }
+            finally
+            {
+                stream1.Dispose();
             }
         }
     }
