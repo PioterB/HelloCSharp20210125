@@ -73,7 +73,12 @@ namespace HelloCSharp.Tools.Time
             }
         }
 
-        private static void ReportYearChange(int year)
+        public void Method(Time t, NewDateDelegate x)
+        {
+            x(t);
+        }
+
+    private static void ReportYearChange(int year)
         {
             var handler = NewYear;
             if (handler == null)

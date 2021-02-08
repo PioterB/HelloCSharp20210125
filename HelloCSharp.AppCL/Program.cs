@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using HelloCSharp.Domain;
 using HelloCSharp.Tools.Physics;
 using HelloCSharp.Tools.Time;
@@ -35,6 +36,14 @@ namespace HelloCSharp.AppCL
             Clock.NewDay -= Clock_NewDay;
 
             Clock.Stop();
+
+            int Logic(int a, int b)
+            {
+                return a + b;
+            }
+
+            Process(5, 4, Logic);
+            Process(5, 4, (a, b) => a + b);
         }
 
         private static void Clock_NewDay(Time time)
@@ -114,6 +123,11 @@ namespace HelloCSharp.AppCL
             var boxContent = box.Takeout();
 
             human.Eat(boxContent);
+        }
+
+        private static int Process(int left, int right, Func<int, int, int> logic)
+        {
+            return logic(left, right);
         }
 
         /*
